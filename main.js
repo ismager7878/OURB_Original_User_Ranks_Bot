@@ -5,6 +5,7 @@ const fs = require('node:fs');
 //Importing the dotenv package to load environment variables from a .env file
 require('dotenv').config();
 
+mileStones = []
 
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds,
@@ -64,5 +65,11 @@ client.on(Events.GuildMemberAdd, member => {
     const channel = member.guild.channels.cache.find(channel => channel.name === 'general');
     if (!channel) return;
 
+    totalMembers = member.guild.memberCount
+
+    mileStones.filter(mileStone => mileStone <= totalMembers)
+
+
+    
     channel.send(`Welcome to the server, ${member}!`);
 })
