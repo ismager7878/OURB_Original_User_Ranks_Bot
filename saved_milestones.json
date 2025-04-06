@@ -1,12 +1,73 @@
 [
   {
-    "roleFormat": "sds##sd",
+    "roleFormat": "The ## GOATS's",
     "guildId": "1085029114546761758",
     "milestones": [
       {
         "milestone": 2,
         "color": 15844367,
-        "roleId": "1358256081008197674"
+        "role": {
+          "guild": "1085029114546761758",
+          "icon": null,
+          "unicodeEmoji": null,
+          "id": "1358401053917315183",
+          "name": "First 2 users",
+          "color": 15844367,
+          "hoist": false,
+          "rawPosition": 1,
+          "permissions": "2248473465835073",
+          "managed": false,
+          "mentionable": false,
+          "flags": 0,
+          "tags": null,
+          "createdTimestamp": 1743938449125
+        }
+      },
+      {
+        "milestone": 5,
+        "color": "15548997",
+        "role": {
+          "guild": "1085029114546761758",
+          "icon": null,
+          "unicodeEmoji": null,
+          "id": "1358401284394324072",
+          "name": "The 5 GOATS's",
+          "color": 15548997,
+          "hoist": false,
+          "rawPosition": 1,
+          "permissions": "2248473465835073",
+          "managed": false,
+          "mentionable": false,
+          "flags": 0,
+          "tags": null,
+          "createdTimestamp": 1743938504075
+        }
+      }
+    ]
+  },
+  {
+    "roleFormat": "First ## users",
+    "guildId": "1357728993012355202",
+    "milestones": [
+      {
+        "milestone": 2,
+        "color": "15105570",
+        "role": {
+          "guild": "1357728993012355202",
+          "icon": null,
+          "unicodeEmoji": null,
+          "id": "1358401952131579974",
+          "name": "First 2 users",
+          "color": 15105570,
+          "hoist": false,
+          "rawPosition": 1,
+          "permissions": "2248473465835073",
+          "managed": false,
+          "mentionable": false,
+          "flags": 0,
+          "tags": null,
+          "createdTimestamp": 1743938663276
+        }
       }
     ]
   }

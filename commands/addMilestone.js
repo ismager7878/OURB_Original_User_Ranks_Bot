@@ -69,7 +69,7 @@ module.exports = {
                 color: parseInt(newMilestone.color),
                 reason: `This guy is on the the first ${newMilestone.milestone} members! A true GOAT!`,
             }).then( role => {
-                newMilestone.setRoleId(role.id);
+                newMilestone.setRole(role);
             }).catch(console.error);
 
         mileStones.addMilestone(newMilestone);

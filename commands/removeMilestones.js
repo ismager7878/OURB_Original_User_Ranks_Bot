@@ -22,7 +22,7 @@ module.exports = {
         }
 
         mileStoneToRemove = mileStones.getMilestones().find(milestone => milestone.milestone === milestoneInt);
-        await interaction.guild.roles.delete(mileStoneToRemove.roleId).catch((err) => {
+        await interaction.guild.roles.delete(mileStoneToRemove.role.id).catch((err) => {
             console.error(err);
             interaction.reply(`Error deleting role: ${milestoneInt}`);
         });

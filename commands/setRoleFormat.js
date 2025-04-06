@@ -20,11 +20,12 @@ module.exports = {
         }
         
         await mileStones.getMilestones().forEach(milestone => {
-            interaction.guild.roles.edit(milestone.roleId, {
+            interaction.guild.roles.edit(milestone.role.id, {
                 name: format.replace("##", milestone.milestone),
             }).catch((err) => {
                 console.error(err);
-                interaction.reply(`Error updating role: ${milestone.roleId}`);
+                interaction.reply(`Error updating role: ${milestone.role.id}`);
+                return;
             });
         });
         

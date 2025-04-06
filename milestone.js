@@ -27,11 +27,11 @@ class MileStoneItem {
   constructor(milestone, color) {
     this.milestone = milestone;
     this.color = color;
-    this.roleId = null;
+    this.role = null;
   }
 
-  setRoleId(roleId) {
-    this.roleId = roleId;
+  setRole(role) {
+    this.role = role;
   }
 }
 

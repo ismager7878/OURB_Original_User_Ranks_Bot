@@ -12,7 +12,7 @@ mileStones = mileStones.map(milestone => {
     oldGuildMilestones.setRoleFormat(milestone.roleFormat);
     milestone.milestones.forEach(milestone => {
         oldmileStone = new MileStoneItem(milestone.milestone, milestone.color);
-        oldmileStone.setRoleId(milestone.roleId);
+        oldmileStone.setRole(milestone.role);
         oldGuildMilestones.addMilestone(oldmileStone);
     }) 
     return oldGuildMilestones;
@@ -50,7 +50,8 @@ applyAllRoles = async (guild) => {
     let members = await guild.members.fetch()
     members = members.filter(member => !member.user.bot); // Filter out bots
     members.sort((a, b) => a.joinedTimestamp - b.joinedTimestamp);
-    members.map(x=>x).forEach((member, index) => {
+
+    await members.map(x=>x).forEach(async (member, index) => {
         memberNumber = index + 1; // +1 because the index is 0 based
         let guildMilestones = guildMilestonesClass.getMilestones().filter(milestone => milestone.milestone >= memberNumber)
         console.log(`Member ${member.user.tag} is number ${memberNumber}`)
@@ -58,12 +59,13 @@ applyAllRoles = async (guild) => {
             console.log(`No relevant milestones found for ${member.user.tag}`);
             return;
         }
+            
 
         //Sort the milestones in ascending order and return the first one
         let bestMilestone = guildMilestones.sort((a, b) => a.milestone - b.milestone)[0];
         
         //console.log(`Best milestone for ${member.user.tag} is ${bestMilestone.milestone}`);
-        member.guild.roles.fetch() // Fetch all roles in the guild
+        await member.guild.roles.fetch() // Fetch all roles in the guild
             .then(async roles => {
                 const roleName = guildMilestonesClass.roleFormat.replace('##', bestMilestone.milestone);
                 console.log(`Looking for role ${roleName}`);
@@ -110,16 +112,18 @@ client.on(Events.InteractionCreate, async interaction => {
     } catch (error) {
         console.error(`Error executing command ${interaction.commandName}:`, error);
         if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+			await interaction.followUp({ content: 'There was an error while executing this command!'});
 		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+			await interaction.reply({ content: 'There was an error while executing this command!'});
 		}
     }
     finally {
         console.log(`Final Milestone guild: ${guildMilestone}`);
         if(command.data.name === 'addmilestone' || command.data.name === 'removemilestone') {
             console.log(`Applying all roles to guild ${interaction.guild.name}`);
-            applyAllRoles(interaction.guild);
+            interaction.editReply(`${await interaction.fetchReply().then(reply => reply.content)} \nApplying all roles...`);
+            await applyAllRoles(interaction.guild);
+            interaction.editReply(`${await interaction.fetchReply().then(reply => reply.content)} Done!`);
         }
         saveToJSON();
     }
@@ -165,7 +169,7 @@ client.on(Events.GuildMemberAdd, async member => {
                     reason: `These guy is one of the first ${bestMilestone.milestone} members! True GOAT's!`,
                 }).then( newRole => {
                     role = newRole
-                    bestMilestone.setRoleId(role.id);
+                    bestMilestone.setRole(role);
                 }).catch(console.error);
             }
 
