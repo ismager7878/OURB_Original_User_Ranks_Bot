@@ -55,6 +55,7 @@ module.exports = {
             await interaction.reply(`Milestone already exists: ${milestoneInt}`);
             return;
         }
+        
         if(milestoneInt < 0) {
             await interaction.reply(`Milestone must be a positive number: ${milestoneInt}`);
             return;

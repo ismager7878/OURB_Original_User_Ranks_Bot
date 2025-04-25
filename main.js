@@ -54,9 +54,7 @@ applyAllRoles = async (guild) => {
     await members.map(x=>x).forEach(async (member, index) => {
         memberNumber = index + 1; // +1 because the index is 0 based
         let guildMilestones = guildMilestonesClass.getMilestones().filter(milestone => milestone.milestone >= memberNumber)
-        console.log(`Member ${member.user.tag} is number ${memberNumber}`)
         if (guildMilestones.length === 0) {
-            console.log(`No relevant milestones found for ${member.user.tag}`);
             return;
         }
             
@@ -68,12 +66,12 @@ applyAllRoles = async (guild) => {
         await member.guild.roles.fetch() // Fetch all roles in the guild
             .then(async roles => {
                 const roleName = guildMilestonesClass.roleFormat.replace('##', bestMilestone.milestone);
-                console.log(`Looking for role ${roleName}`);
+                //console.log(`Looking for role ${roleName}`);
                 let role = roles.find(role => role.name === roleName);
 
                 member.roles.add(role)
                     .then((role) => {
-                        console.log(`Assigned role ${role.name} to ${member.user.tag}`)
+                        //console.log(`Assigned role ${role.name} to ${member.user.tag}`)
                         saveToJSON()
                     })
                     .catch(console.error);
